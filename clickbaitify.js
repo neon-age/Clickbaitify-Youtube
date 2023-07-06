@@ -1,11 +1,12 @@
 const imagesPath = "images/";
-const images = [];
+//const images = [];
 
 // Apply the overlay
 function applyOverlay(thumbnailElement, overlayImageUrl, flip) {
   // Create a new img element for the overlay
   const overlayImage = document.createElement("img");
-  overlayImage.src = overlayImageUrl;
+  overlayImage.src = overlayImageUrl.dataURL;
+    console.error(overlayImageUrl.dataURL);
   overlayImage.style.position = "absolute";
   overlayImage.style.top = "0";
   overlayImage.style.left = "0";
@@ -48,17 +49,18 @@ function applyOverlayToThumbnails() {
 
 // Get a random image URL from a directory
 function getRandomImageFromDirectory() {
-  const randomIndex = Math.floor(Math.random() * images.length);
-  return images[randomIndex];
+  const randomIndex = Math.floor(Math.random() * imagesArray.length);
+  return imagesArray[randomIndex];
 }
 
+/*
 // Checks for all images in the images folder instead of using a preset array, making the extension infinitely scalable
 function checkImageExistence(index = 1) {
   const testedURL = chrome.runtime.getURL(`${imagesPath}${index}.png`);
   fetch(testedURL)
     .then((response) => {
       // Image exists, add it to the images array
-      images.push(testedURL);
+      imagesArray.push(testedURL);
       // Check the next image in the directory
       checkImageExistence(index + 1);
     })
@@ -68,6 +70,13 @@ function checkImageExistence(index = 1) {
         "MrBeastify Loaded Successfully, " + (index - 1) + " images detected."
       );
     });
-}
+}*/
 
-checkImageExistence();
+chrome.storage.local.get("imagesArray", (items) => 
+{
+    imagesArray = items.imagesArray;
+    setInterval(applyOverlayToThumbnails, 100);
+    resolve();
+});
+
+//checkImageExistence();

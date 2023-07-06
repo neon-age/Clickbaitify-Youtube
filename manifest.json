@@ -1,24 +1,41 @@
 {
-    "manifest_version": 2,
-    "name": "YouTube MrBeastify",
-    "version": "1.3",
-    "icons": {
+   "content_scripts": [ {
+      "js": [ "clickbaitify.js" ],
+      "matches": [ "https://www.youtube.com/*" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "Modify YouTube thumbnails to include custom images",
+   "host_permissions": [ "https://www.youtube.com/*" ],
+   "icons": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "64": "icons/icon-64.png",
+      "96": "icons/icon-96.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs9J8PC6uas5fj3xA47NxonIgKHfTgoZ6ACts+dhaRHGCBTxqWuQwDt/rOCBVqCGLjM4sC/i4d/1gTIMbkAe/1TYVAAEDaJwC0zI90Iy8thvLNVVt/GJ1KKgCQNiJyC7G7u9Lkt/Hv7qvmsfg8t0D4S09MMevgeHG9kFvTb65uiCgUXQuy3XyZpLjttH+iabottQjkCDlugd/NzNNCcOx1/f2dYvbi5YvR5LtEmHDjZzpA+X8FE8QqsNBWa9deGC4SM2B/VCWvf5imYJ2GI8aEhzplAltwigHI/4oke8uAKnDFQMypBh5gDjZa2k6WgE+JgthdsD8wSmhHxxuaJO4BwIDAQAB",
+   "manifest_version": 3,
+   "name": "YouTube Clickbaitify",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.3",
+   "web_accessible_resources": [ {
+      "matches": [ "*://*/*" ],
+      "resources": [ "images/*.png" ]
+   } ],
+   "action": {
+      "default_icon": {
         "16": "icons/icon-16.png",
         "32": "icons/icon-32.png",
         "48": "icons/icon-48.png",
         "64": "icons/icon-64.png",
         "96": "icons/icon-96.png"
-    },
-    "description": "Modify YouTube thumbnails to include MrBeast",
-    "permissions": [
-        "https://www.youtube.com/*"
-    ],
-    "content_scripts": [{
-        "matches": ["https://www.youtube.com/*"],
-        "js": ["mrbeastify.js"],
-        "run_at": "document_idle"
-    }],
-    "web_accessible_resources": [
-        "images/*.png"
-    ]
+      },
+      "default_popup": "options.html",
+      "default_title": "Clickbaitify"
+   },
+   "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+   },
+   "permissions": [ "storage", "unlimitedStorage" ]
 }
