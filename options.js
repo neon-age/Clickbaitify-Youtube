@@ -126,6 +126,8 @@ async function RefreshFoldersList()
         const imagesData = chrome.storage.local.get("imagesArray", (items) => 
         {
             imagesArray = items.imagesArray;
+            if (imagesArray == undefined)
+                imagesArray = [];
             resolve();
         });
     });

@@ -6,7 +6,6 @@ function applyOverlay(thumbnailElement, overlayImageUrl, flip) {
   // Create a new img element for the overlay
   const overlayImage = document.createElement("img");
   overlayImage.src = overlayImageUrl.dataURL;
-    console.error(overlayImageUrl.dataURL);
   overlayImage.style.position = "absolute";
   overlayImage.style.top = "0";
   overlayImage.style.left = "0";
@@ -75,7 +74,9 @@ function checkImageExistence(index = 1) {
 chrome.storage.local.get("imagesArray", (items) => 
 {
     imagesArray = items.imagesArray;
-    setInterval(applyOverlayToThumbnails, 100);
+    if (imagesArray == undefined)
+        imagesArray = [];
+    setInterval(applyOverlayToThumbnails, 1000);
     resolve();
 });
 
